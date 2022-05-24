@@ -5,45 +5,21 @@ from time import sleep
 """
 SETUP
 """
-sudoku = [
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0]
-]
-sudoku = [
-    [0,0,0,0,0,0,4,0,0],
-    [0,0,3,2,6,1,0,0,0],
-    [5,0,0,0,0,0,2,0,0],
-    [8,0,4,0,0,9,0,0,0],
-    [6,5,2,8,0,3,0,1,0],
-    [0,1,0,0,5,0,0,0,0],
-    [2,0,0,0,0,0,0,5,0],
-    [0,9,0,6,0,0,0,0,0],
-    [0,0,0,0,0,5,7,6,0]
-]
-# sudoku = [
-#     [0,0,8,0,2,0,0,0,3],
-#     [0,0,0,0,7,8,0,0,9],
-#     [0,2,1,0,0,0,0,0,0],
-#     [0,0,0,9,0,0,0,0,0],
-#     [0,1,4,0,6,0,0,0,0],
-#     [2,0,6,0,0,0,0,0,0],
-#     [0,4,9,0,0,0,0,6,0],
-#     [7,0,2,0,0,0,4,0,8],
-#     [0,8,3,1,0,0,0,5,2]
-# ]
+
+from sudoku_3_stars import sudoku_2 as sudoku
+
+# Format sudoku string naar een nested list
+sudoku = sudoku.split('\n')
+sudoku = [s for s in sudoku if s]
+sudoku = [[c for c in s] for s in sudoku]
 
 # Vervang alle 0 met {1, 2, 3,... 9}
 for row in range(9):
     for col in range(9):
-        if sudoku[row][col] == 0:
+        if sudoku[row][col] == '.':
             sudoku[row][col] = set(range(1,10))
+        else:
+            sudoku[row][col] = int(sudoku[row][col])
 
 # Print
 def print_sudoku():
@@ -149,5 +125,5 @@ while not solved:
     print_sudoku()
     
     # Dev break
-    if i > 100:
+    if i > 50:
         break
